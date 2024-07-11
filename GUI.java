@@ -51,15 +51,21 @@ public class GUI extends JFrame implements MouseMotionListener, MouseListener {
 
     }
 
-    public void updateCells(){
+    public void updateCells(int xSize, int ySize){
+        Board myBoard = new Board(xSize, ySize, grid);
+        setContentPane(myBoard);
+        setVisible(true);
+        System.out.println();
+        System.out.println();
+        printGrid(grid);
         for(int i = 0; i < xNew; i++){
             for(int j = 0 ; j < yNew; j++){
                 int tempNumPlus = 0;
 
                 // Double for loop to check around
-                // (x, y)       -->     (-1, 1)   (0, 1)   (1, 1)
+                // (x, y)       -->     (-1,-1)   (0,-1)   (1,-1)
                 //                      (-1, 0)   (0, 0)   (1, 0)
-                //                      (-1,-1)   (0,-1)   (1,-1)
+                //                      (-1, 1)   (0, 1)   (1, 1)
                 for(int iX = -1; iX <= 1; iX++){
                     for(int jX = -1; jX <= 1; jX++){
 
@@ -88,38 +94,40 @@ public class GUI extends JFrame implements MouseMotionListener, MouseListener {
                 newCells = myCells.getSurroundingCells();
 
 
-                for(int iY = -1; iY <= 1; iY++){
-                    for(int jY = -1; jY <= 1; jY++){
+                grid[i][j] = newCells[4];
 
-                        int xValue = i + iY;
-                        int yValue = j + jY;
 
-                        if(xValue == -1){
-                            xValue = 0;
-                        } else if( xValue == xNew){
-                            xValue = xNew - 1;
-                        }
-
-                        if(yValue == -1){
-                            yValue = 0;
-                        } else if( yValue == yNew){
-                            yValue = yNew - 1;
-                        }
-                        grid[xValue][yValue] = newCells[(iY+1)*3 +(jY+1)];
-                    }
-                }
+//                for(int iY = -1; iY <= 1; iY++){
+//                    for(int jY = -1; jY <= 1; jY++){
+//
+//                        int xValue = i + iY;
+//                        int yValue = j + jY;
+//
+//                        if(xValue == -1){
+//                            xValue = 0;
+//                        } else if( xValue == xNew){
+//                            xValue = xNew - 1;
+//                        }
+//
+//                        if(yValue == -1){
+//                            yValue = 0;
+//                        } else if( yValue == yNew){
+//                            yValue = yNew - 1;
+//                        }
+//                        grid[xValue][yValue] = newCells[(iY+1)*3 +(jY+1)];
+//                    }
+//                }
             }
         }
     }
 
 
 
-    public void simulationTimer(int time){
+    public void simulationTimer(int time,int xSize, int ySize){
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                updateCells();
-                System.out.println("DO!");
+                updateCells(xSize, ySize);
 
             }
         };
@@ -154,6 +162,10 @@ public class GUI extends JFrame implements MouseMotionListener, MouseListener {
                 grid[3][4] = 1;
                 grid[8][8] = 1;
                 grid[8][9] = 1;
+                grid[18][19] = 1;
+                grid[18][20] = 1;
+                grid[18][21] = 1;
+
 
             }
         }
