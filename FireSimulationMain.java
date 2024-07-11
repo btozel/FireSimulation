@@ -81,7 +81,7 @@ public class FireSimulationMain {
 
                     frame.dispose();
                     GUI simulation = new GUI(x,y);
-                    simulation.simulationTimer(time);
+                    simulation.simulationTimer(time, x, y);
 
                 } catch (NumberFormatException invalidInput){
                     JOptionPane.showMessageDialog(frame, "Please Enter Valid Dimensions and Time.",

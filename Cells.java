@@ -31,20 +31,33 @@ public class Cells {
 
             // Wall
             case 0:{
+                // Wall stays always as a wall
                 cellState = 0;
                 break;
             }
 
             // Fire
             case 1: {
-                for(int i = 0; i < this.surroundingCells.length ; i++){
+                for(int i = 0; i < surroundingCells.length ; i++){
+                    // If there is a water (6) around the fire
                     if(surroundingCells[i] == 6){
-                        cellState = 3;
+                        // 1/2 chance stay as a fire
+                        if(rand.nextInt(2) == 0){
+                            cellState = 1;
+                        }
+                        // 1/2 chance turns into ground
+                        else{
+                            cellState = 3;
+                        }
                     }
+                    // If there is no water around the fire
                     else{
-                        if(rand.nextInt(3) == 1){
+                        // 1/4 chance turns into ash (2)
+                        if(rand.nextInt(10) == 1){
                             cellState = 2;
-                        }else{
+                        }
+                        // 3/4 chance stay as a fire
+                        else{
                             cellState = 1;
                         }
                     }
@@ -55,6 +68,7 @@ public class Cells {
 
             // Ash
             case 2:{
+                // 1/3 chance --> turns into Ground(3)
                 if(rand.nextInt(3) == 1){
                     cellState = 3;
                 }
@@ -64,8 +78,8 @@ public class Cells {
 
             // Ground
             case 3:{
-                // 1/4 chance --> new Pine Tree
-                if(rand.nextInt(4) == 0){
+                // 1/10 chance --> new Pine Tree(5)
+                if(rand.nextInt(50) == 0){
                     cellState = 5;
                 }
                 break;
@@ -73,12 +87,13 @@ public class Cells {
 
             // Tree
             case 4:{
-                for(int i = 0; i < this.surroundingCells.length; i++){
+                for(int i = 0; i < surroundingCells.length; i++){
+                    // If there is a fire around the tree
                     if(this.surroundingCells[i] == 1){
-                        if(rand.nextInt(6) == 0){
-                            cellState = 1;
-                        }else{
+                        if(rand.nextInt(10) == 0){
                             cellState = 4;
+                        }else{
+                            cellState = 1;
                         }
                     }
                 }
@@ -89,10 +104,10 @@ public class Cells {
             case 5:{
                 for(int i = 0; i < this.surroundingCells.length; i++){
                     if(this.surroundingCells[i] == 1){
-                        if(rand.nextInt(3) == 0){
-                            cellState = 1;
-                        }else{
+                        if(rand.nextInt(10) == 0){
                             cellState = 5;
+                        }else{
+                            cellState = 1;
                         }
                     }
                     else{
