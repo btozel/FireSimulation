@@ -131,7 +131,7 @@ public class Cells {
                             cellState = 2;
                         }
                     }else{
-                        cellState = 5;
+                        cellState = 6;
                     }
                 }
                 break;

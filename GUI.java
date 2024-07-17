@@ -20,6 +20,14 @@ public class GUI extends JFrame implements MouseMotionListener, MouseListener {
     private int[] newCells = new int[9];
 
 
+    private int leftClickX = -10;
+    private int leftClickY = -10;
+
+    private int rightClickX = -10;
+    private int rightClickY = -10;
+
+
+
     public GUI(int xSize, int ySize){
         super("Fire Simulation");
 
@@ -40,11 +48,10 @@ public class GUI extends JFrame implements MouseMotionListener, MouseListener {
         addMouseListener(this);
         addMouseMotionListener(this);
 
-
-
         printGrid(grid);
 
         Board myBoard = new Board(xSize, ySize, grid);
+
         setContentPane(myBoard);
         setVisible(true);
 
@@ -55,9 +62,7 @@ public class GUI extends JFrame implements MouseMotionListener, MouseListener {
         Board myBoard = new Board(xSize, ySize, grid);
         setContentPane(myBoard);
         setVisible(true);
-        System.out.println();
-        System.out.println();
-        printGrid(grid);
+
         for(int i = 0; i < xNew; i++){
             for(int j = 0 ; j < yNew; j++){
                 int tempNumPlus = 0;
@@ -154,19 +159,6 @@ public class GUI extends JFrame implements MouseMotionListener, MouseListener {
                 } else{
                     grid[i][j] = 3;
                 }
-
-                grid[5][5] = 1;
-
-                grid[10][3] = 1;
-                grid[3][3] = 1;
-                grid[3][4] = 1;
-                grid[8][8] = 1;
-                grid[8][9] = 1;
-                grid[18][19] = 1;
-                grid[18][20] = 1;
-                grid[18][21] = 1;
-
-
             }
         }
     }
@@ -183,21 +175,53 @@ public class GUI extends JFrame implements MouseMotionListener, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getButton() == MouseEvent.BUTTON1){
-            System.out.println("Left! X = " + e.getX() + " Y = " + e.getY());
-        }else if(e.getButton() == MouseEvent.BUTTON3){
-            System.out.println("Right! X = " + e.getX() + " Y = " + e.getY());
+            if(e.getX() >= 0 && e.getY()>= 0 && e.getX() < xNew * 5 && e.getY() < yNew * 5){
+                int x = e.getX() / 5;
+                int y = (e.getY() - 32) / 5;
+                grid[x][y] = 1;
+                System.out.println("Left! X = " + e.getX() + " Y = " + e.getY());
+            }
+        }if(e.getButton() == MouseEvent.BUTTON3){
+            if(e.getX() >= 0 && e.getY()>= 0 && e.getX() < xNew * 5 && e.getY() < yNew * 5){
+                int x = e.getX() / 5;
+                int y = (e.getY() - 32) / 5;
+                grid[x][y] = 6;
+                System.out.println("Right! X = " + e.getX() + " Y = " + e.getY());
+            }
+        }if(e.getButton() == MouseEvent.BUTTON2){
+            if(e.getX() >= 0 && e.getY()>= 0 && e.getX() < xNew * 5 && e.getY() < yNew * 5){
+                int x = e.getX() / 5;
+                int y = (e.getY() - 32) / 5;
+                grid[x][y] = 0;
+                System.out.println("Middle! X = " + e.getX() + " Y = " + e.getY());
+            }
         }
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
         if(e.getButton() == MouseEvent.BUTTON1){
-            System.out.println("Dragging Left! X = " + e.getX() + " Y = " + e.getY());
-        } else if(e.getButton() == MouseEvent.BUTTON3){
-            System.out.println("Dragging Right! X = " + e.getX() + " Y = " + e.getY());
+            if(e.getX() >= 0 && e.getY()>= 0 && e.getX() < xNew * 5 && e.getY() < yNew * 5){
+                int x = e.getX() / 5;
+                int y = (e.getY() - 32) / 5;
+                grid[x][y] = 1;
+                System.out.println("Dragging Left! X = " + e.getX() + " Y = " + e.getY());
+            }
+        }if(e.getButton() == MouseEvent.BUTTON3){
+            if(e.getX() >= 0 && e.getY()>= 0 && e.getX() < xNew * 5 && e.getY() < yNew * 5){
+                int x = e.getX() / 5;
+                int y = (e.getY() - 32) / 5;
+                grid[x][y] = 6;
+                System.out.println("Dragging Right! X = " + e.getX() + " Y = " + e.getY());
+            }
+        }if(e.getButton() == MouseEvent.BUTTON2){
+            if(e.getX() >= 0 && e.getY()>= 0 && e.getX() < xNew * 5 && e.getY() < yNew * 5){
+                int x = e.getX() / 5;
+                int y = (e.getY() - 32) / 5;
+                grid[x][y] = 0;
+                System.out.println("Dragging Middle! X = " + e.getX() + " Y = " + e.getY());
+            }
         }
-
-
     }
 
     @Override

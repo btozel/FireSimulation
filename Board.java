@@ -15,7 +15,6 @@ public class Board extends JPanel {
         this.grid = grid;
 
         JPanel board = new JPanel();
-        board.setLayout(null);
         board.setPreferredSize(new Dimension(x, y));
     }
 
@@ -36,7 +35,7 @@ public class Board extends JPanel {
                 } else if(grid[i][j] == 5){             // Pine Tree
                     g.setColor(Color.green);
                 } else if(grid[i][j] == 6){             // Water
-                    g.setColor(Color.CYAN);
+                    g.setColor(Color.BLUE);
                 }
                 g.fill3DRect(i*5, j*5, 5, 5, false);
             }
